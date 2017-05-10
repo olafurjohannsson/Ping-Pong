@@ -42,6 +42,7 @@ int main()
     leftPaddle.setSize(paddleSize - sf::Vector2f(3, 3));
     leftPaddle.setOutlineThickness(3);
     leftPaddle.setOutlineColor(sf::Color::Black);
+    
     leftPaddle.setFillColor(sf::Color(100, 100, 200));
     leftPaddle.setOrigin(paddleSize / 2.f);
 
@@ -71,7 +72,7 @@ int main()
     pauseMessage.setFont(font);
     pauseMessage.setCharacterSize(40);
     pauseMessage.setPosition(170.f, 150.f);
-    pauseMessage.setFillColor(sf::Color::White);
+    //pauseMessage.setFillColor(sf::Color::White);
     pauseMessage.setString("Welcome to SFML pong!\nPress space to start the game");
 
     // Define the paddles properties
