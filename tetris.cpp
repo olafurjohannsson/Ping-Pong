@@ -10,13 +10,23 @@
 #include <vector>
 #include <sstream>
 
+/*
+ * Create base TetrisShape class that all tetris shapes inherit from
+ *
+ * Create 2x2 grid of 1000x1000
+ * Create random 4 block cubes and make them traverse the well
+ *
+ *
+ *
+ */
+
 namespace Tetris {
 	class TetrisObject {
 	public:
 		TetrisObject()
 		{
 			auto testShape = new sf::RectangleShape();
-			sf::Vector2f shapeSize(25, 100);
+			sf::Vector2f shapeSize(std::rand() % 200, 100);
 			testShape->setSize(shapeSize);
 			testShape->setOutlineThickness(3);
 			testShape->setOutlineColor(sf::Color::Black);
@@ -30,7 +40,7 @@ namespace Tetris {
 		~TetrisObject()
 		{
 			std::cout << "deleted\n";
-			//delete this->rect;
+			delete this->rect;
 		}
 		uint32_t x = 0;
 		uint32_t y = 0;
@@ -50,6 +60,28 @@ namespace Tetris {
 
 	    return buf;
 	}
+
+	/*
+	 *
+	 * Game board that pieces are places on
+	 */
+	class Board
+	{
+	public:
+		Board()
+		{
+
+		}
+
+
+
+		bool place_shape(sf::RenderWindow &rf, Tetris::TetrisObject shape)
+		{
+			*shape.rect->setPosition(100.f, 100.f);
+			rf.draw(*shape.rect);
+			return true;
+		}
+	};
 
 	class Game {
 
@@ -103,6 +135,11 @@ namespace Tetris {
 			return false;
 		}
 
+		void dispose()
+		{
+
+		}
+
 		void play()
 		{
 
@@ -112,6 +149,13 @@ namespace Tetris {
 		    rectangles.push_back(testShape);
 
 		    testShape->x = 100.f, testShape->y = 100.f;
+		    enum {
+		    	none,
+		    	up,
+				right,
+				down,
+				left
+		    } key_state = none;
 		    // quid pro quo
 		    // yes, we like fancy words too
 			while (this->window->isOpen())
@@ -138,6 +182,26 @@ namespace Tetris {
 
 						}
 					}
+
+					if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Up))
+					{
+						key_state = up;
+					}
+					if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Right))
+					{
+						std::cout << "right\n";
+						key_state = right;
+					}
+					if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Down))
+					{
+						key_state = down;
+					}
+					if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Left))
+					{
+						std::cout << "left\n";
+						key_state = left;
+					}
+
 				}
 
 				this->window->clear(sf::Color(50, 200, 50));
@@ -148,23 +212,58 @@ namespace Tetris {
 					{
 						std::cout << "x: " << shape->x << ", y: " << shape->y << std::endl;
 
+						if (event.type == sf::Event::KeyPressed)
+						{
+							if (key_state == right)
+							{
+								shape->x++;
+							}
+							if (key_state == left)
+							{
+								shape->x--;
+							}
+							if (key_state == down)
+							{
+								shape->y++;
+							}
+							if (key_state == up)
+							{
+								shape->y--;
+							}
+						}
+
+
 						if (shape->finished)
 						{
 							this->window->draw(*shape->rect);
 						}
-						else if (shape->y > this->gameHeight)
-						{
-							shape->finished = true;
-
-							auto newShape = new Tetris::TetrisObject;
-							newShape->y = 100.f;
-							newShape->x = std::rand() % this->gameWidth;
-							rectangles.push_back(newShape);
-						}
 						else
 						{
-							shape->rect->setPosition(shape->x, shape->y++);
-							this->window->draw(*shape->rect);
+//							rectangles.erase(std::remove_if(rectangles.begin(), rectangles.end(),
+//									[&rectangles, &shape](Tetris::TetrisObject* &x)
+//									{
+//										if (x->x > shape->x)
+//										{
+//											std::cout << "if (x.x > shape->x)\n";
+//
+//										}
+////										return true;
+////									}));
+
+							if (shape->y > this->gameHeight)
+							{
+								shape->finished = true;
+
+								auto newShape = new Tetris::TetrisObject;
+								newShape->y = 100.f;
+								newShape->x = std::rand() % this->gameWidth;
+								rectangles.push_back(newShape);
+							}
+							else
+							{
+								shape->rect->setPosition(shape->x, shape->y);
+								this->window->draw(*shape->rect);
+							}
 						}
 					}
 				}
@@ -175,6 +274,13 @@ namespace Tetris {
 
 				this->window->display();
 			}
+
+
+			for (auto rect : rectangles)
+			{
+				delete rect;
+			}
+
 		}
 
     private:
@@ -194,6 +300,7 @@ int main(int argc, char **argv)
 
 	game.test();
 	game.play();
+	game.dispose();
 
 
     return EXIT_SUCCESS;
