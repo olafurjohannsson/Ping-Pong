@@ -8,6 +8,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <iostream>
 
 
 ////////////////////////////////////////////////////////////
@@ -45,6 +46,7 @@ int main()
     leftPaddle.setSize(paddleSize - sf::Vector2f(3, 3));
     leftPaddle.setOutlineThickness(3);
     leftPaddle.setOutlineColor(sf::Color::Black);
+    
     leftPaddle.setFillColor(sf::Color(100, 100, 200));
     leftPaddle.setOrigin(paddleSize / 2.f);
 
@@ -74,7 +76,7 @@ int main()
     pauseMessage.setFont(font);
     pauseMessage.setCharacterSize(40);
     pauseMessage.setPosition(170.f, 150.f);
-    pauseMessage.setFillColor(sf::Color::White);
+    //pauseMessage.setFillColor(sf::Color::White);
     pauseMessage.setString("Welcome to SFML pong!\nPress space to start the game");
 
     // Define the paddles properties
@@ -91,23 +93,28 @@ int main()
     bool isPlaying = true;
     while (window.isOpen())
     {
+    	std::cout << "isOpen\n";
         // Handle events
         sf::Event event;
         while (window.pollEvent(event))
         {
+        	std::cout << "pollEvent\n";
             // Window closed or escape key pressed: exit
             if ((event.type == sf::Event::Closed) ||
                ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
             {
                 window.close();
+                std::cout << "window closed\n" << std::endl;
                 break;
             }
 
             // Space key pressed: play
             if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Space))
             {
+            	std::cout << "space pressed\n";
                 if (!isPlaying)
                 {
+                	std::cout << "!isPlaying\n";
                     // (re)start the game
                     isPlaying = true;
                     clock.restart();
@@ -127,9 +134,10 @@ int main()
                 }
             }
         }
-
+        std::cout << "outside pollEvent\n";
         if (isPlaying)
         {
+        	std::cout << "isPlaying\n";
             float deltaTime = clock.restart().asSeconds();
 
             // Move the player's paddle
@@ -230,6 +238,7 @@ int main()
 
         if (isPlaying)
         {
+        	std::cout << "isPlaying, draw\n";
             // Draw the paddles and the ball
             window.draw(leftPaddle);
             window.draw(rightPaddle);
@@ -237,10 +246,11 @@ int main()
         }
         else
         {
+        	std::cout << "!isPlaying, draw\n";
             // Draw the pause message
             window.draw(pauseMessage);
         }
-
+        std::cout << "display\n";
         // Display things on screen
         window.display();
     }
