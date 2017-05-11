@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <cmath>
+#include <iostream>
 #include <ctime>
 #include <cstdlib>
 
@@ -18,6 +19,8 @@
 int main()
 {
     std::srand(static_cast<unsigned int>(std::time(NULL)));
+    
+
 
     // Define some constants
     const float pi = 3.14159f;
@@ -82,8 +85,10 @@ int main()
     const float ballSpeed   = 400.f;
     float ballAngle         = 0.f; // to be changed later
 
+
+
     sf::Clock clock;
-    bool isPlaying = false;
+    bool isPlaying = true;
     while (window.isOpen())
     {
         // Handle events
@@ -175,12 +180,14 @@ int main()
             }
             if (ball.getPosition().y - ballRadius < 0.f)
             {
+                std::cout << "1\n";
                 ballSound.play();
                 ballAngle = -ballAngle;
                 ball.setPosition(ball.getPosition().x, ballRadius + 0.1f);
             }
             if (ball.getPosition().y + ballRadius > gameHeight)
             {
+                std::cout << "2\n";
                 ballSound.play();
                 ballAngle = -ballAngle;
                 ball.setPosition(ball.getPosition().x, gameHeight - ballRadius - 0.1f);
