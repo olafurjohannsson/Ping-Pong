@@ -7,6 +7,7 @@
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
+#include <iostream>
 
 
 ////////////////////////////////////////////////////////////
@@ -87,23 +88,28 @@ int main()
     bool isPlaying = false;
     while (window.isOpen())
     {
+    	std::cout << "isOpen\n";
         // Handle events
         sf::Event event;
         while (window.pollEvent(event))
         {
+        	std::cout << "pollEvent\n";
             // Window closed or escape key pressed: exit
             if ((event.type == sf::Event::Closed) ||
                ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
             {
                 window.close();
+                std::cout << "window closed\n" << std::endl;
                 break;
             }
 
             // Space key pressed: play
             if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Space))
             {
+            	std::cout << "space pressed\n";
                 if (!isPlaying)
                 {
+                	std::cout << "!isPlaying\n";
                     // (re)start the game
                     isPlaying = true;
                     clock.restart();
@@ -123,9 +129,10 @@ int main()
                 }
             }
         }
-
+        std::cout << "outside pollEvent\n";
         if (isPlaying)
         {
+        	std::cout << "isPlaying\n";
             float deltaTime = clock.restart().asSeconds();
 
             // Move the player's paddle
@@ -224,6 +231,7 @@ int main()
 
         if (isPlaying)
         {
+        	std::cout << "isPlaying, draw\n";
             // Draw the paddles and the ball
             window.draw(leftPaddle);
             window.draw(rightPaddle);
@@ -231,10 +239,11 @@ int main()
         }
         else
         {
+        	std::cout << "!isPlaying, draw\n";
             // Draw the pause message
             window.draw(pauseMessage);
         }
-
+        std::cout << "display\n";
         // Display things on screen
         window.display();
     }
