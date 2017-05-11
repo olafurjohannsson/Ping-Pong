@@ -2,12 +2,7 @@
     "configurations": [
         {
             "name": "Mac",
-<<<<<<< HEAD
-            "includePath": ["/usr/include", "/usr/local/include"],
-            "browse" : {
-                "limitSymbolsToIncludedHeaders" : true,
-                "databaseFilename" : ""
-=======
+
             "includePath": [
                 "/usr/include",
                 "/usr/local/include"
@@ -15,17 +10,10 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
->>>>>>> a920d5f3a65505d9a91f2f4138d8f0fe8da43859
             }
         },
         {
             "name": "Linux",
-<<<<<<< HEAD
-            "includePath": ["/usr/include"],
-            "browse" : {
-                "limitSymbolsToIncludedHeaders" : true,
-                "databaseFilename" : ""
-=======
             "includePath": [
             "/usr/lib/gcc/x86_64-redhat-linux/6.3.1/../../../../include/c++/6.3.1",
             "/usr/lib/gcc/x86_64-redhat-linux/6.3.1/../../../../include/c++/6.3.1/x86_64-redhat-linux",
@@ -37,24 +25,17 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
->>>>>>> a920d5f3a65505d9a91f2f4138d8f0fe8da43859
             }
         },
         {
             "name": "Win32",
-<<<<<<< HEAD
-            "includePath": ["c:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include"],
-            "browse" : {
-                "limitSymbolsToIncludedHeaders" : true,
-                "databaseFilename" : ""
-=======
+
             "includePath": [
                 "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
->>>>>>> a920d5f3a65505d9a91f2f4138d8f0fe8da43859
             }
         }
     ]

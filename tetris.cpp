@@ -21,6 +21,11 @@
  */
 
 namespace Tetris {
+
+	class Tetramino {
+		
+	};
+
 	class TetrisObject {
 	public:
 		TetrisObject()
@@ -47,7 +52,7 @@ namespace Tetris {
 		bool finished;
 		sf::RectangleShape *rect;
 	};
-	constexpr double pi() { return std::atan(1)*4; }
+	//constexpr double pi() { return std::atan(1)*4; }
 
 	const std::string currentDateTime() {
 	    time_t     now = time(0);
@@ -77,7 +82,8 @@ namespace Tetris {
 
 		bool place_shape(sf::RenderWindow &rf, Tetris::TetrisObject shape)
 		{
-			*shape.rect->setPosition(100.f, 100.f);
+			//*shape.rect->setPosition(100.f, 100.f);
+			
 			rf.draw(*shape.rect);
 			return true;
 		}
@@ -296,12 +302,15 @@ namespace Tetris {
 
 int main(int argc, char **argv)
 {
-	Tetris::Game game;
+	try {
+		Tetris::Game game;
+		game.test();
+		game.play();
+		game.dispose();
+	} 
+	catch (...) {
+		return EXIT_FAILURE;
+	}
 
-	game.test();
-	game.play();
-	game.dispose();
-
-
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
