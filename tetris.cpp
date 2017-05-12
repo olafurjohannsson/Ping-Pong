@@ -22,7 +22,16 @@
 
 namespace Tetris {
 
-	class Tetramino {
+	class Piece {
+		public:
+			uint32_t size_x;
+			uint32_t size_y;
+
+		private:
+			sf::Vector2f shape_size;
+	};
+
+	class Tetrimino {
 		
 	};
 
@@ -87,6 +96,9 @@ namespace Tetris {
 			rf.draw(*shape.rect);
 			return true;
 		}
+	private:
+		uint32_t size_x;
+		uint32_t size_y;
 	};
 
 	class Game {
@@ -162,6 +174,9 @@ namespace Tetris {
 				down,
 				left
 		    } key_state = none;
+			
+			sf::Texture texture;
+			texture.loadFromFile("sprites.png");
 		    // quid pro quo
 		    // yes, we like fancy words too
 			while (this->window->isOpen())
@@ -211,6 +226,25 @@ namespace Tetris {
 				}
 
 				this->window->clear(sf::Color(50, 200, 50));
+				// Declare and load a texture
+				for (int x = 0; x < 100; x++)
+				{
+					for (int y = 0; y < 100; y++)
+					{
+						sf::Sprite sprite;
+						sprite.setTexture(texture);
+						sprite.setTextureRect(sf::IntRect(10, 10, 50, 30));
+				
+						sprite.setColor(sf::Color(255, 255, 255, 200));
+						sprite.setPosition(x, y);
+						
+						this->window->draw(sprite);
+					}
+				}
+				
+				
+				// Draw it
+				
 
 				if (this->isPlaying)
 				{
@@ -230,11 +264,11 @@ namespace Tetris {
 							}
 							if (key_state == down)
 							{
-								shape->y++;
+								//shape->y++;
 							}
 							if (key_state == up)
 							{
-								shape->y--;
+								//shape->y--;
 							}
 						}
 
@@ -267,7 +301,7 @@ namespace Tetris {
 							}
 							else
 							{
-								shape->rect->setPosition(shape->x, shape->y);
+								shape->rect->setPosition(shape->x, shape->y++);
 								this->window->draw(*shape->rect);
 							}
 						}
@@ -280,13 +314,10 @@ namespace Tetris {
 
 				this->window->display();
 			}
-
-
 			for (auto rect : rectangles)
 			{
 				delete rect;
 			}
-
 		}
 
     private:
@@ -296,7 +327,6 @@ namespace Tetris {
         sf::RenderWindow *window;
         typedef sf::RenderWindow* rw;
 	};
-
 }
 
 
