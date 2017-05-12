@@ -11,24 +11,24 @@ namespace Tetris {
 	public:
 		static void Start(void)
 		{
-			if (this->State != Game::Uninitialized)
+			if (_state != Game::Uninitialized)
 				return;
 
-			this->_window.create(sf::VideoMode(1024, 768, 32), "ASDF");
-			this->State = Game::SplashScreen;
+			_window.create(sf::VideoMode(1024, 768, 32), "ASDF");
+			_state = Game::Splash;
 
-			if (!this->IsExiting())
+			if (Game::IsExiting())
 			{
-				this->Loop();
+				Game::Loop();
 			}
-			this->_window.close();
+			_window.close();
 		}
 
 	private:
 		static bool IsExiting();
 		static void Loop(void)
 		{
-			switch (Game::State)
+			switch (_state)
 			{
 				case Game::Splash:
 				{
@@ -51,17 +51,18 @@ namespace Tetris {
 		static void ShowSplashScreen(bool show = true);
 		static void ShowMenu(bool show = true);
 
-		enum {
+		enum State {
 			Uninitialized,
 			Splash,
 			Pause,
 			Menu,
 			Play,
 			Exiting
-		} State = Uninitialized;
+		};
 
 		//static GameState _state;
 		static sf::RenderWindow _window;
+		static State _state;
 	};
 
     class GameObject 
