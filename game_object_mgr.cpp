@@ -6,64 +6,7 @@
 
 namespace Tetris {
 
-	class Game
-	{
-	public:
-		static void Start(void)
-		{
-			if (_state != Game::Uninitialized)
-				return;
 
-			_window.create(sf::VideoMode(1024, 768, 32), "ASDF");
-			_state = Game::Splash;
-
-			if (Game::IsExiting())
-			{
-				Game::Loop();
-			}
-			_window.close();
-		}
-
-	private:
-		static bool IsExiting();
-		static void Loop(void)
-		{
-			switch (_state)
-			{
-				case Game::Splash:
-				{
-					ShowSplashScreen();
-					break;
-				}
-				case Game::Menu:
-				{
-					ShowMenu();
-					break;
-				}
-				case Game::Play:
-				{
-
-
-					break;
-				}
-			}
-		}
-		static void ShowSplashScreen(bool show = true);
-		static void ShowMenu(bool show = true);
-
-		enum State {
-			Uninitialized,
-			Splash,
-			Pause,
-			Menu,
-			Play,
-			Exiting
-		};
-
-		//static GameState _state;
-		static sf::RenderWindow _window;
-		static State _state;
-	};
 
     class GameObject 
     {

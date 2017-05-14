@@ -7,18 +7,21 @@ CPP_SRCS += \
 ../GameBoard.cpp \
 ../Pong.cpp \
 ../game_object_mgr.cpp \
+../main.cpp \
 ../tetris.cpp 
 
 OBJS += \
 ./GameBoard.o \
 ./Pong.o \
 ./game_object_mgr.o \
+./main.o \
 ./tetris.o 
 
 CPP_DEPS += \
 ./GameBoard.d \
 ./Pong.d \
 ./game_object_mgr.d \
+./main.d \
 ./tetris.d 
 
 
