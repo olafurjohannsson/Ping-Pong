@@ -6,23 +6,32 @@
 CPP_SRCS += \
 ../GameBoard.cpp \
 ../Pong.cpp \
+../game.cpp \
 ../game_object_mgr.cpp \
+../helpers.cpp \
 ../main.cpp \
-../tetris.cpp 
+../tetris.cpp \
+../tetrisobject.cpp 
 
 OBJS += \
 ./GameBoard.o \
 ./Pong.o \
+./game.o \
 ./game_object_mgr.o \
+./helpers.o \
 ./main.o \
-./tetris.o 
+./tetris.o \
+./tetrisobject.o 
 
 CPP_DEPS += \
 ./GameBoard.d \
 ./Pong.d \
+./game.d \
 ./game_object_mgr.d \
+./helpers.d \
 ./main.d \
-./tetris.d 
+./tetris.d \
+./tetrisobject.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

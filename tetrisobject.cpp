@@ -1,8 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
+namespace Tetris {
 
 class TetrisObject {
 public:
-	TetrisObject()
+	TetrisObject() : x(0), y(0)
 	{
 		auto testShape = new sf::RectangleShape();
 		sf::Vector2f shapeSize(std::rand() % 200, 100);
@@ -21,8 +24,9 @@ public:
 		std::cout << "deleted\n";
 		delete this->rect;
 	}
-	uint32_t x = 0;
-	uint32_t y = 0;
+	uint32_t x;
+	uint32_t y;
 	bool finished;
 	sf::RectangleShape *rect;
 };
+}

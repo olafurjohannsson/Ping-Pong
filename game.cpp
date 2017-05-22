@@ -1,6 +1,7 @@
 
 
 #include "game.hpp"
+#include "helpers.cpp"
 
 const float game::player_speed = 100.f;
 const sf::Time game::time_per_frame = sf::seconds(1.f/60.f);
@@ -20,31 +21,35 @@ game::game() : window(sf::VideoMode(640, 480), "SFML", sf::Style::Close),
 	if (!texture.loadFromFile("Media/Textures/Eagle.png"))
 	{
 		// Handle loading error
+		printf("no eagle\n");
 	}
 
-	player.setTexture(mTexture);
+	player.setTexture(texture);
 	player.setPosition(100.f, 100.f);
 	
-	font.loadFromFile("Media/Sansation.ttf");
-	statistics_text.setFont(mFont);
+	if (!font.loadFromFile("Media/Sansation.ttf"))
+	{
+		printf("no font\n");
+	}
+	statistics_text.setFont(font);
 	statistics_text.setPosition(5.f, 5.f);
 	statistics_text.setCharacterSize(10);
 }
 
-void Game::run()
+void game::run()
 {
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-	while (mWindow.isOpen())
+	while (window.isOpen())
 	{
 		sf::Time elapsedTime = clock.restart();
 		timeSinceLastUpdate += elapsedTime;
-		while (timeSinceLastUpdate > TimePerFrame)
+		while (timeSinceLastUpdate > time_per_frame)
 		{
-			timeSinceLastUpdate -= TimePerFrame;
+			timeSinceLastUpdate -= time_per_frame;
 
 			process_events();
-			update(TimePerFrame);
+			update(time_per_frame);
 		}
 
 		update_statistics(elapsedTime);
@@ -52,10 +57,10 @@ void Game::run()
 	}
 }
 
-void Game::process_events()
+void game::process_events()
 {
 	sf::Event event;
-	while (mWindow.pollEvent(event))
+	while (window.pollEvent(event))
 	{
 		switch (event.type)
 		{
@@ -78,13 +83,13 @@ void game::update(sf::Time elapsedTime)
 {
 	sf::Vector2f movement(0.f, 0.f);
 	if (is_moving_up)
-		movement.y -= PlayerSpeed;
+		movement.y -= player_speed;
 	if (is_moving_down)
-		movement.y += PlayerSpeed;
+		movement.y += player_speed;
 	if (is_moving_left)
-		movement.x -= PlayerSpeed;
+		movement.x -= player_speed;
 	if (is_moving_right)
-		movement.x += PlayerSpeed;
+		movement.x += player_speed;
 		
 	player.move(movement * elapsedTime.asSeconds());
 }

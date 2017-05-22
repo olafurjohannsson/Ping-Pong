@@ -10,6 +10,9 @@
 #include <vector>
 #include <sstream>
 
+
+#include "tetrisobject.cpp"
+
 /*
  * Create base TetrisShape class that all tetris shapes inherit from
  *
@@ -57,9 +60,8 @@ namespace Tetris {
 	class Board
 	{
 	public:
-		Board()
+		Board() : size_y(0), size_x(0)
 		{
-
 		}
 
 
@@ -80,8 +82,8 @@ namespace Tetris {
 
 	public:
 		Game(uint32_t gameWidth = 800, uint32_t gameHeight = 600) :
-            gameWidth(gameWidth), gameHeight(gameHeight),
-			window(NULL), isPlaying(false)
+            gameWidth(gameWidth), gameHeight(gameHeight), isPlaying(false),
+			window(NULL)
 		{
 			sf::VideoMode vm(this->gameWidth, this->gameHeight, 32);
 			std::string name = "Tetris";
@@ -89,8 +91,6 @@ namespace Tetris {
             this->window = new sf::RenderWindow(vm, name,
 					sf::Style::Titlebar | sf::Style::Close);
             
-            
-
 		}
         ~Game()
         {
