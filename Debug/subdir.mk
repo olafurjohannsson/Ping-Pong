@@ -4,34 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../GameBoard.cpp \
-../Pong.cpp \
-../game.cpp \
-../game_object_mgr.cpp \
+../Game.cpp \
 ../helpers.cpp \
-../main.cpp \
-../tetris.cpp \
-../tetrisobject.cpp 
+../main.cpp 
 
 OBJS += \
-./GameBoard.o \
-./Pong.o \
-./game.o \
-./game_object_mgr.o \
+./Game.o \
 ./helpers.o \
-./main.o \
-./tetris.o \
-./tetrisobject.o 
+./main.o 
 
 CPP_DEPS += \
-./GameBoard.d \
-./Pong.d \
-./game.d \
-./game_object_mgr.d \
+./Game.d \
 ./helpers.d \
-./main.d \
-./tetris.d \
-./tetrisobject.d 
+./main.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

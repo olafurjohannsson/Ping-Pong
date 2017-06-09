@@ -1,4 +1,4 @@
-GameBoard.o: ../GameBoard.cpp /usr/local/include/SFML/Graphics.hpp \
+Game.o: ../Game.cpp ../Game.h /usr/local/include/SFML/Graphics.hpp \
   /usr/local/include/SFML/Window.hpp /usr/local/include/SFML/System.hpp \
   /usr/local/include/SFML/Config.hpp \
   /usr/local/include/SFML/System/Clock.hpp \
@@ -68,6 +68,8 @@ GameBoard.o: ../GameBoard.cpp /usr/local/include/SFML/Graphics.hpp \
   /usr/local/include/SFML/Graphics/Glsl.inl \
   /usr/local/include/SFML/Graphics/Sprite.hpp \
   /usr/local/include/SFML/Graphics/Text.hpp
+
+../Game.h:
 
 /usr/local/include/SFML/Graphics.hpp:
 
